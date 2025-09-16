@@ -4,175 +4,500 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mugisha Ziza | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg: #f9f9f9;
-      --text: #333;
-      --card: #fff;
-      --header: #222;
-      --footer: #222;
-      --link: #222;
-      --link-hover: #444;
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #06b6d4;
+      --dark: #1f2937;
+      --darker: #111827;
+      --light: #f3f4f6;
+      --lighter: #f9fafb;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --card: #ffffff;
+      --header: rgba(255, 255, 255, 0.95);
+      --footer: var(--darker);
+      --transition: all 0.3s ease;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
+
     body.dark {
-      --bg: #121212;
-      --text: #eaeaea;
-      --card: #1e1e1e;
-      --header: #000;
-      --footer: #000;
-      --link: #eaeaea;
-      --link-hover: #bbb;
+      --primary: #818cf8;
+      --primary-dark: #6366f1;
+      --secondary: #22d3ee;
+      --dark: #111827;
+      --darker: #030712;
+      --light: #1f2937;
+      --lighter: #111827;
+      --text: #f9fafb;
+      --text-light: #d1d5db;
+      --card: #1f2937;
+      --header: rgba(17, 24, 39, 0.95);
+      --footer: var(--darker);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      background: var(--bg);
+      background: var(--lighter);
       color: var(--text);
-      transition: background 0.3s, color 0.3s;
+      transition: var(--transition);
+      overflow-x: hidden;
     }
+
+    /* Header & Navigation */
     header {
       background: var(--header);
-      color: white;
-      padding: 25px 0;
+      color: var(--text);
+      padding: 1.2rem 0;
       text-align: center;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     header h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
+    header p {
+      margin: 0.2rem 0 0;
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
     nav {
-      margin-top: 12px;
+      display: flex;
+      gap: 1.5rem;
     }
+
     nav a {
-      margin: 0 12px;
-      color: #ddd;
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
     }
-    nav a:hover {
-      color: white;
-    }
-    #toggleMode {
+
+    nav a::after {
+      content: '';
       position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 6px 12px;
-      background: #444;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: var(--transition);
     }
-    #toggleMode:hover {
-      background: #666;
+
+    nav a:hover {
+      color: var(--primary);
     }
-    section {
-      max-width: 1000px;
-      margin: auto;
-      padding: 50px 20px;
+
+    nav a:hover::after {
+      width: 100%;
     }
-    h2 {
-      border-bottom: 2px solid var(--text);
-      padding-bottom: 5px;
-      margin-bottom: 25px;
-      font-size: 24px;
-    }
-    .skills, .projects {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-    .card {
+
+    #toggleMode {
       background: var(--card);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
+      color: var(--text);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+
+    #toggleMode:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
     }
-    .contact a {
+
+    /* Sections */
+    section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
       display: inline-block;
-      margin: 8px;
-      padding: 12px 18px;
-      background: var(--link);
+      font-weight: 700;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    /* About Section */
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      max-width: 800px;
+    }
+
+    /* Skills Section */
+    .skills {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .skill-card {
+      background: var(--card);
+      padding: 1.8rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .skill-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .skill-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Projects Section */
+    .projects {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .project-card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .project-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+    }
+
+    .project-card p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    /* Contact Section */
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       color: white;
-      border-radius: 6px;
+      border-radius: 50px;
       text-decoration: none;
       font-weight: 500;
-      transition: background 0.3s;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
     }
+
     .contact a:hover {
-      background: var(--link-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
     }
+
+    /* Footer */
     footer {
       text-align: center;
       background: var(--footer);
       color: white;
-      padding: 18px;
-      margin-top: 50px;
+      padding: 2.5rem;
+      margin-top: 5rem;
+    }
+
+    footer p {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .skills, .projects {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    /* Hero Section */
+    #hero {
+      text-align: center;
+      padding: 6rem 2rem;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border-radius: 0 0 30px 30px;
+      margin: 0 auto 4rem;
+      max-width: 100%;
+    }
+
+    #hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 1s ease-out;
+    }
+
+    #hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      color: var(--text-light);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-buttons a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .hero-buttons a:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Mugisha Ziza</h1>
-    <p>IT Student • Future Software Developer</p>
-    <button id="toggleMode">🌙 Dark Mode</button>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="header-container">
+      <div>
+        <h1>Mugisha Ziza</h1>
+        <p>IT Student • Future Software Developer</p>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="toggleMode" aria-label="Toggle dark mode">🌙</button>
+    </div>
   </header>
 
-  <section id="about">
-  <h2>About Me</h2>
-  <p>
-    I'm <strong>Mugisha Ziza</strong>, a Software Developer currently studying 
-    <strong>Networking & Communication Systems</strong>.  
-    My focus is on building practical software solutions while gaining expertise in network design, communication systems, 
-    and IT infrastructure.  
-  </p>
-  <p>
-    With skills in Java, JavaScript, MySQL, and networking concepts, I aim to bridge the gap between 
-    <strong>software development</strong> and <strong>network technologies</strong>, creating secure and scalable systems that solve real-world problems.
-  </p>
-</section>
+  <section id="hero">
+    <h2>Bridging Software & Network Technologies</h2>
+    <p>Creating secure and scalable systems that solve real-world problems</p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn-primary"><i class="fas fa-code"></i> View My Work</a>
+      <a href="#contact" class="btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+    </div>
+  </section>
 
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm <strong>Mugisha Ziza</strong>, a Software Developer currently studying 
+      <strong>Networking & Communication Systems</strong>.  
+      My focus is on building practical software solutions while gaining expertise in network design, communication systems, 
+      and IT infrastructure.  
+    </p>
+    <p>
+      With skills in Java, JavaScript, MySQL, and networking concepts, I aim to bridge the gap between 
+      <strong>software development</strong> and <strong>network technologies</strong>, creating secure and scalable systems that solve real-world problems.
+    </p>
+  </section>
 
   <section id="skills">
     <h2>Skills</h2>
     <div class="skills">
-      <div class="card">Java</div>
-      <div class="card">JavaScript</div>
-      <div class="card">HTML & CSS</div>
-      <div class="card">MySQL</div>
-      <div class="card">Git & GitHub</div>
-      <div class="card">Problem Solving</div>
+      <div class="skill-card">
+        <i class="fab fa-java"></i>
+        <h3>Java</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-js-square"></i>
+        <h3>JavaScript</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-html5"></i>
+        <i class="fab fa-css3-alt"></i>
+        <h3>HTML & CSS</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-database"></i>
+        <h3>MySQL</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-git-alt"></i>
+        <h3>Git & GitHub</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Problem Solving</h3>
+      </div>
     </div>
   </section>
 
   <section id="projects">
     <h2>Projects</h2>
     <div class="projects">
-      <div class="card">
+      <div class="project-card">
         <h3>Hotel Booking System</h3>
         <p>A Java Swing desktop system with login, booking, and reporting features.</p>
       </div>
-      <div class="card">
+      <div class="project-card">
         <h3>Handbag E-commerce Website</h3>
         <p>A responsive business website with product listings, RWF pricing, and social media integration.</p>
       </div>
-      <div class="card">
+      <div class="project-card">
         <h3>Employee Salary Management</h3>
         <p>A Java + MySQL system that calculates allowances, deductions, and net salaries.</p>
       </div>
@@ -181,11 +506,12 @@
 
   <section id="contact">
     <h2>Contact</h2>
+    <p>Feel free to reach out to me for collaborations or just to say hello!</p>
     <div class="contact">
-      <a href="tel:+250780611240">📞 Call Me</a>
-      <a href="mailto:mugishaziza8@gmail.com">📧 Email Me</a>
-      <a href="https://github.com/M-Ziza">🐙 GitHub</a>
-      <a href="https://www.linkedin.com/in/mugisha-ziza-726332311/">💼 LinkedIn</a>
+      <a href="tel:+250780611240"><i class="fas fa-phone"></i> Call Me</a>
+      <a href="mailto:mugishaziza8@gmail.com"><i class="fas fa-envelope"></i> Email Me</a>
+      <a href="https://github.com/M-Ziza"><i class="fab fa-github"></i> GitHub</a>
+      <a href="https://www.linkedin.com/in/mugisha-ziza-726332311/"><i class="fab fa-linkedin"></i> LinkedIn</a>
     </div>
   </section>
 
@@ -198,10 +524,22 @@
     toggleBtn.addEventListener("click", () => {
       document.body.classList.toggle("dark");
       if (document.body.classList.contains("dark")) {
-        toggleBtn.textContent = "☀️ Light Mode";
+        toggleBtn.textContent = "☀️";
+        toggleBtn.setAttribute("aria-label", "Switch to light mode");
       } else {
-        toggleBtn.textContent = "🌙 Dark Mode";
+        toggleBtn.textContent = "🌙";
+        toggleBtn.setAttribute("aria-label", "Switch to dark mode");
       }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
     });
   </script>
 </body>
